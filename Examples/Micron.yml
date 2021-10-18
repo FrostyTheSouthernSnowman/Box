@@ -1,0 +1,7 @@
+version: 0.0.1-Beta
+boxes:
+  example-box:
+    port: 80
+    build: build-example.py
+    build-binary: false
+    build-dockerfile: true
