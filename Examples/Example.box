@@ -1,0 +1,15 @@
+# An example Micron file, for reference
+# specify the language to use
+[ lang='python==3.9.0' ]
+# specify which template to use
+[ base_box=='flask-web-server' ]
+# set a box name, useful for more advanced configurations in micron.yml
+[ box_name='example-box' ]
+# uses the defaults for this project type
+[ use_default ]
+
+@app.route('/')
+def home():
+  return 'Micron will automatically import Flask and create an app variable because use_default was specified. It will also run the server'
+  
+[ end_box ]
