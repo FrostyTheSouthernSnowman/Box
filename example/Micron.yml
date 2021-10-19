@@ -4,4 +4,3 @@ boxes:
     port: 80
     build: build-example.py
     build-binary: false
-    build-dockerfile: true
