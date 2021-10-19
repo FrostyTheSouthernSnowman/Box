@@ -1,2 +1,2 @@
-# Micron
-Micron is a tool for building scalable microservices.
+# Box
+Box is a tool for building scalable microservices.
