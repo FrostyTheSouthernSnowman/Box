@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/FrostyTheSouthernSnowman/Micron/boxes"
+	"github.com/FrostyTheSouthernSnowman/Box/boxes"
 )
 
 func FindBox() ([]string, error) {

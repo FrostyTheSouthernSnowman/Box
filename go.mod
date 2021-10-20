@@ -1,5 +1,5 @@
-module github.com/FrostyTheSouthernSnowman/Micron
+module github.com/FrostyTheSouthernSnowman/Box
 
 go 1.17
 
-replace github.com/FrostyTheSouthernSnowman/Micron/boxes => ./boxes
+replace github.com/FrostyTheSouthernSnowman/Box/boxes => ./boxes

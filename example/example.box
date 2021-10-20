@@ -1,15 +1,15 @@
-# An example Micron file, for reference
+# An example Box file, for reference
 # specify the language to use
 [ lang='python3' ]
 # specify which template to use
 [ base_box='flask-web-server' ]
-# set a box name, useful for more advanced configurations in micron.yml
+# set a box name, useful for more advanced configurations in Box.yml
 [ box_name='example-box' ]
 # uses the defaults for this project type
 [ use_default ]
 
 @app.route('/')
 def home():
-  return '<h1>Micron will automatically import Flask and create an app variable because use_default was specified. It will also run the server!</h1>'
+  return '<h1>Box will automatically import Flask and create an app variable because use_default was specified. It will also run the server!</h1>'
 
 [ end_box ]

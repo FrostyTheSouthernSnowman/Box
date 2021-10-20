@@ -1,7 +1,7 @@
-# Contributing to Micron's source code
+# Contributing to Box's source code
 - create an issue
 - fork the project
 - open a pull request
-- your code will be review and the merged into micron
+- your code will be review and the merged into Box
 
-Thank you for contributing to Micron!
+Thank you for contributing to Box!
