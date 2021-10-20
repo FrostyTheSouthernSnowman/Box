@@ -1,3 +1,0 @@
-@app.route('/')
-def home():
-  return 'Micron will automatically import Flask and create an app variable because use_default was specified. It will also run the server'
