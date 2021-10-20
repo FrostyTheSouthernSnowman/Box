@@ -1,4 +1,4 @@
-package FlaskWebServer
+package boxes
 
 func FlaskWebServer(port string) (string, string) {
 	return `import flask
