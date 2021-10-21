@@ -43,4 +43,7 @@ To contribute to Box, clone or fork this repo and follow the instructions above 
 # License
 This project is licenced under MIT Open Source License.
 
-If you like this project, please star it on github and recomend it to people you know.
+# Additional Info
+[(Back to top)](#table-of-contents)
+
+If you have questions or comments, feel free to open an issue about it. Leave a star in GitHub, give a clap in Medium if you found Box interesting or useful for your applications.
