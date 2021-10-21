@@ -13,11 +13,15 @@ If you are using Box, please star us on Github. Any support is highly appreciate
 # Table of contents
 - [What is Box?](#Box)
 - [TOC](#table-of-contents)
+- [Vision](#vision)
 - [Installation](#installation-and-usage)
 - [Development](#development)
 - [Contribute](#contribute)
     - [Adding new features or fixing bugs (see Contributing.md)](#adding-new-features-or-fixing-bugs)
 - [License](#license)
+
+# Vision
+Box is an ecosystem for developing microservices using "boxes". "boxes" are microservices built off of basic templates for common microservices roles e.g. api, search, AI, etc. These microservices will be defined in config files and the code will be in base programing languages e.g. python, nodejs, golang, java, etc. or they can be built in a "dialect" or collection of properties for configuring the defined for each base. For example, a web rest api might have CRUD endpoints for different database schemas, and wrappers for communicating with other microservices. At some point, Box will be fully compatible with docker, kubernetes, and other major cloud native applications.
 
 # Installation and Usage
 [(Back to top)](#table-of-contents)
