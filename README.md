@@ -46,4 +46,4 @@ This project is licenced under MIT Open Source License.
 # Additional Info
 [(Back to top)](#table-of-contents)
 
-If you have questions or comments, feel free to open an issue about it. Leave a star in GitHub, give a clap in Medium if you found Box interesting or useful for your applications.
+If you have questions or comments, feel free to open an issue about it. Leave a star in GitHub or give a clap in Medium if you found Box interesting or useful for your applications.
