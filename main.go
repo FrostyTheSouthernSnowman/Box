@@ -48,7 +48,7 @@ func ReadBoxFile(filepath string, port string) {
 	boxes.MakeBoxFile(box, port)
 }
 
-func main() {
+/*func main() {
 	fmt.Println("Finding box configuration")
 	files, err := FindBox()
 
@@ -58,4 +58,8 @@ func main() {
 		fmt.Println("Buidling your project")
 		ReadBoxFile(files[0], "7000")
 	}
+}
+*/
+func main() {
+	boxes.ParseYAML("example/box.yml")
 }
