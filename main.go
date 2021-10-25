@@ -39,23 +39,24 @@ func FindBox() ([]string, error) {
 	return nil, nil
 }
 
-func ReadBoxFile(filepath string, port string) {
+func ReadBoxFile(filepath string, yaml_config boxes.YAML) {
 	data, err := ioutil.ReadFile(filepath)
 	if err != nil {
 		log.Panicf("failed reading data from file: %s", err)
 	}
 	box := string(data)
-	boxes.MakeBoxFile(box, port)
+	boxes.MakeBoxFile(box, yaml_config)
 }
 
 func main() {
 	fmt.Println("Finding box configuration")
 	files, err := FindBox()
+	config := boxes.ParseYAML(os.Args[1])
 
 	if files == nil && err == nil {
 		log.Fatalf("Could not find file in specified dir: %s", os.Args[1])
 	} else {
 		fmt.Println("Buidling your project")
-		ReadBoxFile(files[0], "7000")
+		ReadBoxFile(files[0], config)
 	}
 }
