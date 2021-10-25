@@ -6,7 +6,6 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"strconv"
 
 	"github.com/FrostyTheSouthernSnowman/Box/boxes"
 )
@@ -46,7 +45,7 @@ func ReadBoxFile(filepath string, yaml_config boxes.YAML) {
 		log.Panicf("failed reading data from file: %s", err)
 	}
 	box := string(data)
-	boxes.MakeBoxFile(box, strconv.Itoa(yaml_config.Box.Port))
+	boxes.MakeBoxFile(box, yaml_config)
 }
 
 func main() {

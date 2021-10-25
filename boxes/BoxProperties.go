@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -69,33 +70,35 @@ func getProperties(box string) BoxConfig {
 	return BoxProperties
 }
 
-func MakeBoxFile(box string, port string) {
+func MakeBoxFile(box string, config YAML) {
 	var code []string
 	properties := getProperties(box)
-	filename := properties.name
+	filename := config.Box.Build
 	if properties.base == "flask-web-server" {
-		begining, end := FlaskWebServer(port)
+		begining, end := FlaskWebServer(strconv.Itoa(config.Box.Port))
 		code = append([]string{begining}, properties.code...)
 		code = append(code, end)
 	}
-	NewFile, err := os.Create(os.Args[1] + "/" + filename)
-	if err != nil {
-		fmt.Println(err)
-		NewFile.Close()
-		return
-	}
+	if !config.Box.Build_bin {
+		NewFile, err := os.Create(os.Args[1] + "/" + filename)
+		if err != nil {
+			fmt.Println(err)
+			NewFile.Close()
+			return
+		}
 
-	for _, line := range code {
-		fmt.Fprintln(NewFile, line)
+		for _, line := range code {
+			fmt.Fprintln(NewFile, line)
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
+		err = NewFile.Close()
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
-	}
-	err = NewFile.Close()
-	if err != nil {
-		fmt.Println(err)
-		return
 	}
 	fmt.Println("finished building your box!")
 }
