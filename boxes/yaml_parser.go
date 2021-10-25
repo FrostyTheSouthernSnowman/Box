@@ -1,33 +1,24 @@
 package boxes
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 
 	"gopkg.in/yaml.v3"
 )
 
-type box struct {
-	port         string
-	build        string
-	build_binary bool
-}
-
 type YAML struct {
-	versiom string
-	boxes   []box
+	Box struct {
+		Port      int    `yaml:"port"`
+		Build     string `yaml:"build"`
+		Build_bin bool   `yaml:"build-binary"`
+	} `yaml:"box"`
 }
 
-func ParseYAML(fileName string) {
-	yfile, err := ioutil.ReadFile(fileName)
+func ParseYAML(path string) YAML {
+	yfile := read_file(path, ".yml")
 
-	if err != nil {
-
-		log.Fatal(err)
-	}
-
-	data := make(map[string]YAML)
+	var data YAML
 
 	err2 := yaml.Unmarshal(yfile, &data)
 
@@ -36,8 +27,18 @@ func ParseYAML(fileName string) {
 		log.Fatal(err2)
 	}
 
-	for k, v := range data {
+	return data
+}
 
-		fmt.Printf("%s: %s\n", k, v)
+func read_file(path string, ext string) []byte {
+	yfile, err := ioutil.ReadFile(path + "/box" + ext)
+
+	if err != nil && ext == ".yml" {
+		yaml_file := read_file(path, ".yaml")
+		return yaml_file
+	} else if err != nil && ext == ".yaml" {
+		log.Fatal(err)
 	}
+
+	return yfile
 }
