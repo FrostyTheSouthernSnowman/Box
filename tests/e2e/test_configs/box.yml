@@ -1,0 +1,4 @@
+box:
+    port: 80
+    build: flask-box.py
+    build-binary: false

@@ -1,11 +1,11 @@
 package boxes
 
 type BoxConfig struct {
-	name string
-	base string
-	code []string
+	Name string
+	Base string
+	Code []string
 }
 
 func CreateBoxConfig(name string, base string, code []string) BoxConfig {
-	return BoxConfig{name: name, base: base, code: code}
+	return BoxConfig{Name: name, Base: base, Code: code}
 }

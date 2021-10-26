@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func getStringInBetween(str string, startS string, endS string) (result string, found bool) {
+func GetStringInBetween(str string, startS string, endS string) (result string, found bool) {
 	s := strings.Index(str, startS)
 	if s == -1 {
 		return result, false
@@ -48,7 +48,7 @@ func getProperties(box string) BoxConfig {
 					log.Fatalf("Unsuported language!")
 				}
 			} else if strings.HasPrefix(line, "[ box_name='") {
-				BoxName, _ = getStringInBetween(line, "[ box_name='", "' ]")
+				BoxName, _ = GetStringInBetween(line, "[ box_name='", "' ]")
 			} else if strings.HasPrefix(line, "[ base_box='") {
 				if line == "[ base_box='flask-web-server' ]" {
 					baseBox = "flask-web-server"
@@ -70,17 +70,17 @@ func getProperties(box string) BoxConfig {
 	return BoxProperties
 }
 
-func MakeBoxFile(box string, config YAML) {
+func MakeBoxFile(dir string, box string, config YAML) {
 	var code []string
 	properties := getProperties(box)
 	filename := config.Box.Build
-	if properties.base == "flask-web-server" {
+	if properties.Base == "flask-web-server" {
 		begining, end := FlaskWebServer(strconv.Itoa(config.Box.Port))
-		code = append([]string{begining}, properties.code...)
+		code = append([]string{begining}, properties.Code...)
 		code = append(code, end)
 	}
 	if !config.Box.Build_bin {
-		NewFile, err := os.Create(os.Args[1] + "/" + filename)
+		NewFile, err := os.Create(dir + "/" + filename)
 		if err != nil {
 			fmt.Println(err)
 			NewFile.Close()
