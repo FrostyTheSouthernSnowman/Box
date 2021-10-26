@@ -19,4 +19,4 @@ jobs:
         go-version: 1.17
 
     - name: Test
-      run: ./.../scripts/test.sh
+      run: sh ./scripts/test.sh
