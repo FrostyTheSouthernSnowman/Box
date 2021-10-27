@@ -29,7 +29,7 @@ func getProperties(box string) BoxConfig {
 	var BoxName string
 	var fileExtension string
 	var baseBox string
-	boxes := boxes.GetBoxes()
+	boxes := *boxes.GetBoxes()
 
 	for _, line := range strings.Split(strings.TrimSuffix(box, "\n"), "\n") {
 		if line == "" {
@@ -81,9 +81,9 @@ func MakeBoxFile(dir string, box string, config YAML) {
 	properties := getProperties(box)
 	filename := config.Box.Build
 	if properties.Base == "flask-web-server" {
-		begining, end := boxes.FlaskWebServer(strconv.Itoa(config.Box.Port))
-		code = append([]string{begining}, properties.Code...)
-		code = append(code, end)
+		box := boxes.FlaskWebServer(strconv.Itoa(config.Box.Port))
+		code = append([]string{box.Begining}, properties.Code...)
+		code = append(code, box.End)
 	}
 	if !config.Box.Build_bin {
 		NewFile, err := os.Create(dir + "/" + filename)
