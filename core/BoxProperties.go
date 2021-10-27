@@ -1,4 +1,4 @@
-package boxes
+package core
 
 import (
 	"fmt"
@@ -6,6 +6,8 @@ import (
 	"os"
 	"strconv"
 	"strings"
+
+	"github.com/FrostyTheSouthernSnowman/Box/boxes"
 )
 
 func GetStringInBetween(str string, startS string, endS string) (result string, found bool) {
@@ -27,6 +29,7 @@ func getProperties(box string) BoxConfig {
 	var BoxName string
 	var fileExtension string
 	var baseBox string
+	boxes := boxes.GetBoxes()
 
 	for _, line := range strings.Split(strings.TrimSuffix(box, "\n"), "\n") {
 		if line == "" {
@@ -50,8 +53,11 @@ func getProperties(box string) BoxConfig {
 			} else if strings.HasPrefix(line, "[ box_name='") {
 				BoxName, _ = GetStringInBetween(line, "[ box_name='", "' ]")
 			} else if strings.HasPrefix(line, "[ base_box='") {
-				if line == "[ base_box='flask-web-server' ]" {
-					baseBox = "flask-web-server"
+				boxName, _ := GetStringInBetween(line, "[ base_box='", "' ]")
+				for _, box := range boxes {
+					if box == boxName {
+						baseBox = boxName
+					}
 				}
 			} else if line == "[ use_default ]" {
 				continue
@@ -75,7 +81,7 @@ func MakeBoxFile(dir string, box string, config YAML) {
 	properties := getProperties(box)
 	filename := config.Box.Build
 	if properties.Base == "flask-web-server" {
-		begining, end := FlaskWebServer(strconv.Itoa(config.Box.Port))
+		begining, end := boxes.FlaskWebServer(strconv.Itoa(config.Box.Port))
 		code = append([]string{begining}, properties.Code...)
 		code = append(code, end)
 	}

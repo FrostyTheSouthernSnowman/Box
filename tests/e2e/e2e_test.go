@@ -4,17 +4,17 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/FrostyTheSouthernSnowman/Box/boxes"
+	"github.com/FrostyTheSouthernSnowman/Box/core"
 )
 
 func Test_e2e_using_example(t *testing.T) {
-	files, err := boxes.FindBox("test_configs")
-	config := boxes.ParseYAML("test_configs")
+	files, err := core.FindBox("test_configs")
+	config := core.ParseYAML("test_configs")
 
 	if files == nil && err == nil {
 		t.Fatalf("Could not find file in specified dir: ./test_config")
 	} else {
-		boxes.ReadBoxFile("test_configs", files[0], config)
+		core.ReadBoxFile("test_configs", files[0], config)
 	}
 
 	data, err := ioutil.ReadFile("test_configs/flask-box.py")

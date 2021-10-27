@@ -1,4 +1,4 @@
-package boxes
+package core
 
 type BoxConfig struct {
 	Name string
