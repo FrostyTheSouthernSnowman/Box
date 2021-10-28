@@ -28,7 +28,7 @@ func getProperties(box string) BoxConfig {
 	var code []string
 	var BoxName string
 	var fileExtension string
-	var baseBox string
+	var baseBox boxes.Box
 	boxes := *boxes.GetBoxes()
 
 	for _, line := range strings.Split(strings.TrimSuffix(box, "\n"), "\n") {
@@ -55,8 +55,8 @@ func getProperties(box string) BoxConfig {
 			} else if strings.HasPrefix(line, "[ base_box='") {
 				boxName, _ := GetStringInBetween(line, "[ base_box='", "' ]")
 				for _, box := range boxes {
-					if box == boxName {
-						baseBox = boxName
+					if box.Name == boxName {
+						baseBox.Name = boxName
 					}
 				}
 			} else if line == "[ use_default ]" {
@@ -80,7 +80,7 @@ func MakeBoxFile(dir string, box string, config YAML) {
 	var code []string
 	properties := getProperties(box)
 	filename := config.Box.Build
-	if properties.Base == "flask-web-server" {
+	if properties.Base.Name == "flask-web-server" {
 		box := boxes.FlaskWebServer(strconv.Itoa(config.Box.Port))
 		code = append([]string{box.Begining}, properties.Code...)
 		code = append(code, box.End)

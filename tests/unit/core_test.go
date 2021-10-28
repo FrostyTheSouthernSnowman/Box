@@ -3,6 +3,7 @@ package unit_tests
 import (
 	"testing"
 
+	"github.com/FrostyTheSouthernSnowman/Box/boxes"
 	"github.com/FrostyTheSouthernSnowman/Box/core"
 )
 
@@ -28,8 +29,8 @@ func TestGetStringInBetween(t *testing.T) {
 }
 
 func TestBoxConfigConstructor(t *testing.T) {
-	Config := core.CreateBoxConfig("test config", "test base", []string{"test code"})
-	if Config.Name != "test config" || Config.Base != "test base" || !ArrayEqual(Config.Code, []string{"test code"}) {
+	Config := core.CreateBoxConfig("test config", boxes.Box{"test base", "foo", "bar"}, []string{"test code"})
+	if Config.Name != "test config" || Config.Base.Name != "test base" || !ArrayEqual(Config.Code, []string{"test code"}) {
 		t.Fatalf("Expected: Returned, %s:%s, %s:%s, {%s}:{%s}", Config.Name, "test config", Config.Base, "test base", Config.Code[0], "test code")
 	}
 }

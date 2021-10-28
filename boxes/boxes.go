@@ -1,17 +1,18 @@
 package boxes
 
-var Boxes []string
+var Boxes []Box
 
-func GetBoxes() *[]string {
+func GetBoxes() *[]Box {
 	return &Boxes
 }
 
-func AddBox(name string) bool {
-	Boxes = append(Boxes, name)
+func AddBox(box Box) bool {
+	Boxes = append(Boxes, box)
 	return true
 }
 
 type Box struct {
+	Name     string
 	Begining string
 	End      string
 }
