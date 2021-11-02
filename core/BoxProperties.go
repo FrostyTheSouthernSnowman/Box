@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strconv"
 	"strings"
 
 	"github.com/FrostyTheSouthernSnowman/Box/boxes"
@@ -81,7 +80,7 @@ func MakeBoxFile(dir string, box string, config YAML) {
 	properties := getProperties(box)
 	filename := config.Box.Build
 	if properties.Base.Name == "flask-web-server" {
-		box := boxes.FlaskWebServer(strconv.Itoa(config.Box.Port))
+		box := boxes.FlaskWebServer()
 		code = append([]string{box.Begining}, properties.Code...)
 		code = append(code, box.End)
 	}

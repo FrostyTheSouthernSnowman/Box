@@ -9,11 +9,14 @@ import (
 
 type YAML struct {
 	Box struct {
+		Box       string `yaml:"box"`
 		Port      int    `yaml:"port"`
 		Build     string `yaml:"build"`
 		Build_bin bool   `yaml:"build-binary"`
 	} `yaml:"box"`
 }
+
+var Config YAML
 
 func ParseYAML(path string) YAML {
 	yfile := read_file(path, ".yml")
@@ -27,6 +30,7 @@ func ParseYAML(path string) YAML {
 		log.Fatal(err2)
 	}
 
+	Config = data
 	return data
 }
 

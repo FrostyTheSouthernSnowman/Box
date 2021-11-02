@@ -12,7 +12,9 @@ func AddBox(box Box) bool {
 }
 
 type Box struct {
-	Name     string
-	Begining string
-	End      string
+	Name       string
+	Lang       string
+	Begining   string
+	End        string
+	Dockerfile string
 }

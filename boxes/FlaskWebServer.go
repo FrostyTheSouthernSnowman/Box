@@ -1,11 +1,15 @@
 package boxes
 
-var _ bool = AddBox(Box{"flask-web-server", `import flask
-app = flask.Flask(__name__)`, `if __name__=="__main__":
-	app.run(port=)`})
+import (
+	"strconv"
 
-func FlaskWebServer(port string) Box {
-	return Box{"flask-web-server", `import flask
+	"github.com/FrostyTheSouthernSnowman/Box/core"
+)
+
+var _ bool = AddBox(FlaskWebServer())
+
+func FlaskWebServer() Box {
+	return Box{"flask-web-server", "python", `import flask
 app = flask.Flask(__name__)`, `if __name__=="__main__":
-	app.run(port=` + port + `)`}
+	app.run(port=` + strconv.Itoa(core.Config.Box.Port) + `)`, "docker"}
 }
