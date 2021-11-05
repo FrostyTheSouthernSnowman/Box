@@ -1,6 +1,4 @@
 # An example Box file, for reference
-# specify the language to use
-[ lang='python3' ]
 # specify which template to use
 [ base_box='flask-web-server' ]
 # set a box name, useful for more advanced configurations in Box.yml

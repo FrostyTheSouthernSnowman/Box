@@ -6,11 +6,12 @@ import (
 	"os"
 
 	"github.com/FrostyTheSouthernSnowman/Box/core"
+	utils "github.com/FrostyTheSouthernSnowman/Box/utils"
 )
 
-var Config core.YAML = core.ParseYAML(os.Args[1])
-
 func main() {
+	Config := utils.Config
+
 	fmt.Println("Finding box configuration")
 	files, err := core.FindBox(os.Args[1])
 

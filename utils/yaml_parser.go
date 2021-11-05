@@ -3,6 +3,8 @@ package core
 import (
 	"io/ioutil"
 	"log"
+	"os"
+	"strings"
 
 	"gopkg.in/yaml.v3"
 )
@@ -16,9 +18,13 @@ type YAML struct {
 	} `yaml:"box"`
 }
 
-var Config YAML
+var Config YAML = ParseYAML(os.Args[1])
 
 func ParseYAML(path string) YAML {
+	if strings.HasSuffix(path, "testlog.txt") {
+		path = "test_configs"
+	}
+
 	yfile := read_file(path, ".yml")
 
 	var data YAML
@@ -30,7 +36,6 @@ func ParseYAML(path string) YAML {
 		log.Fatal(err2)
 	}
 
-	Config = data
 	return data
 }
 

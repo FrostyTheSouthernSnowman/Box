@@ -6,6 +6,8 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+
+	utils "github.com/FrostyTheSouthernSnowman/Box/utils"
 )
 
 func FindBox(rootDir string) ([]string, error) {
@@ -35,7 +37,7 @@ func FindBox(rootDir string) ([]string, error) {
 	return nil, nil
 }
 
-func ReadBoxFile(dir string, filepath string, yaml_config YAML) {
+func ReadBoxFile(dir string, filepath string, yaml_config utils.YAML) {
 	data, err := ioutil.ReadFile(filepath)
 	if err != nil {
 		log.Panicf("failed reading data from file: %s", err)

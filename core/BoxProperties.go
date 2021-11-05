@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/FrostyTheSouthernSnowman/Box/boxes"
+	utils "github.com/FrostyTheSouthernSnowman/Box/utils"
 )
 
 func GetStringInBetween(str string, startS string, endS string) (result string, found bool) {
@@ -28,7 +29,8 @@ func getProperties(box string) BoxConfig {
 	var BoxName string
 	var fileExtension string
 	var baseBox boxes.Box
-	boxes := *boxes.GetBoxes()
+	var baseBoxName string
+	all_boxes := *boxes.GetBoxes()
 
 	for _, line := range strings.Split(strings.TrimSuffix(box, "\n"), "\n") {
 		if line == "" {
@@ -53,9 +55,9 @@ func getProperties(box string) BoxConfig {
 				BoxName, _ = GetStringInBetween(line, "[ box_name='", "' ]")
 			} else if strings.HasPrefix(line, "[ base_box='") {
 				boxName, _ := GetStringInBetween(line, "[ base_box='", "' ]")
-				for _, box := range boxes {
+				for _, box := range all_boxes {
 					if box.Name == boxName {
-						baseBox.Name = boxName
+						baseBoxName = boxName
 					}
 				}
 			} else if line == "[ use_default ]" {
@@ -70,20 +72,19 @@ func getProperties(box string) BoxConfig {
 
 	BoxName = BoxName + fileExtension
 
+	baseBox = boxes.CreateBox(baseBoxName)
+
 	BoxProperties := CreateBoxConfig(BoxName, baseBox, code)
 
 	return BoxProperties
 }
 
-func MakeBoxFile(dir string, box string, config YAML) {
+func MakeBoxFile(dir string, box string, config utils.YAML) {
 	var code []string
 	properties := getProperties(box)
 	filename := config.Box.Build
-	if properties.Base.Name == "flask-web-server" {
-		box := boxes.FlaskWebServer()
-		code = append([]string{box.Begining}, properties.Code...)
-		code = append(code, box.End)
-	}
+	code = append([]string{properties.Base.Begining}, properties.Code...)
+	code = append(code, properties.Base.End)
 	if !config.Box.Build_bin {
 		NewFile, err := os.Create(dir + "/" + filename)
 		if err != nil {

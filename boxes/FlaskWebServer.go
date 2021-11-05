@@ -3,7 +3,7 @@ package boxes
 import (
 	"strconv"
 
-	"github.com/FrostyTheSouthernSnowman/Box/core"
+	utils "github.com/FrostyTheSouthernSnowman/Box/utils"
 )
 
 var _ bool = AddBox(FlaskWebServer())
@@ -11,5 +11,5 @@ var _ bool = AddBox(FlaskWebServer())
 func FlaskWebServer() Box {
 	return Box{"flask-web-server", "python", `import flask
 app = flask.Flask(__name__)`, `if __name__=="__main__":
-	app.run(port=` + strconv.Itoa(core.Config.Box.Port) + `)`, "docker"}
+	app.run(port=` + strconv.Itoa(utils.Config.Box.Port) + `)`, "docker"}
 }

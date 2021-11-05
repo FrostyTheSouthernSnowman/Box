@@ -5,11 +5,12 @@ import (
 	"testing"
 
 	"github.com/FrostyTheSouthernSnowman/Box/core"
+	utils "github.com/FrostyTheSouthernSnowman/Box/utils"
 )
 
 func Test_e2e_using_example(t *testing.T) {
 	files, err := core.FindBox("test_configs")
-	config := core.ParseYAML("test_configs")
+	config := utils.Config
 
 	if files == nil && err == nil {
 		t.Fatalf("Could not find file in specified dir: ./test_config")
